@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker
 from config import settings
 from fastapi import HTTPException, status
 
-MYSQL_DATABASE_URL = f"postgresql://{settings.database_username}:{settings.database_password}@{settings.database_hostname}/{settings.database_name}"
+MYSQL_DATABASE_URL = f"postgresql://{settings.database_username}:{settings.database_password}@{settings.database_hostname}:{settings.database_port}/{settings.database_name}"
 
 engine = create_engine(MYSQL_DATABASE_URL)
 
