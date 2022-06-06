@@ -11,7 +11,7 @@ class User(Base):
     last_name = Column(String, nullable=False)
     gender = Column(String, nullable=False)
     picture = Column(String)
-    email = Column(String, nullable=False, unique=True)
+    email = Column(String, nullable=False)
     password = Column(String, nullable=False)
     created_at = Column(
         TIMESTAMP(timezone=True),
