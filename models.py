@@ -6,12 +6,12 @@ from database import Base
 
 class User(Base):
     __tablename__ = "users"
-    id = Column(Integer, primary_key=True, nullable=False)
+    user_id = Column(Integer, primary_key=True, nullable=False)
     first_name = Column(String, nullable=False)
     last_name = Column(String, nullable=False)
     gender = Column(String, nullable=False)
     picture = Column(String)
-    email = Column(String, nullable=False)
+    email = Column(String, nullable=False, unique=True)
     password = Column(String, nullable=False)
     created_at = Column(
         TIMESTAMP(timezone=True),
@@ -41,7 +41,7 @@ class PostLikes(Base):
 
     user_id = Column(
         Integer,
-        ForeignKey("users.id", ondelete="CASCADE"),
+        ForeignKey("users.user_id", ondelete="CASCADE"),
         primary_key=True,
         nullable=False
     )
@@ -81,7 +81,7 @@ class CommentLikes(Base):
 
     user_id = Column(
         Integer,
-        ForeignKey("users.id", ondelete="CASCADE"),
+        ForeignKey("users.user_id", ondelete="CASCADE"),
         primary_key=True,
         nullable=False
     )
@@ -120,7 +120,7 @@ class CommentReplyLikes(Base):
 
     user_id = Column(
         Integer,
-        ForeignKey("users.id", ondelete="CASCADE"),
+        ForeignKey("users.user_id", ondelete="CASCADE"),
         primary_key=True,
         nullable=False
     )
@@ -143,13 +143,13 @@ class FriendRequest(Base):
 
     user_id = Column(
         Integer,
-        ForeignKey("users.id", ondelete="CASCADE"),
+        ForeignKey("users.user_id", ondelete="CASCADE"),
         primary_key=True,
         nullable=False
     )
     friend_id = Column(
         Integer,
-        ForeignKey("users.id", ondelete="CASCADE"),
+        ForeignKey("users.user_id", ondelete="CASCADE"),
         primary_key=True,
         nullable=False
     )
@@ -164,13 +164,13 @@ class Friend(Base):
 
     user_id = Column(
         Integer,
-        ForeignKey("users.id", ondelete="CASCADE"),
+        ForeignKey("users.user_id", ondelete="CASCADE"),
         primary_key=True,
         nullable=False
     )
     friend_id = Column(
         Integer,
-        ForeignKey("users.id", ondelete="CASCADE"),
+        ForeignKey("users.user_id", ondelete="CASCADE"),
         primary_key=True,
         nullable=False
     )
@@ -185,14 +185,14 @@ class BlockList(Base):
 
     user_id = Column(
         Integer,
-        ForeignKey("users.id", ondelete="CASCADE"),
+        ForeignKey("users.user_id", ondelete="CASCADE"),
         primary_key=True,
         nullable=False
     )
 
     friend_id = Column(
         Integer,
-        ForeignKey("users.id", ondelete="CASCADE"),
+        ForeignKey("users.user_id", ondelete="CASCADE"),
         primary_key=True,
         nullable=False
     )
