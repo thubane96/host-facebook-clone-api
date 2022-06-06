@@ -26,4 +26,8 @@ app.include_router(comment_reply.router)
 app.include_router(friend_system.router)
 app.include_router(user.router)
 app.include_router(message.router)
-#app.include_router()
+
+
+@app.get('/')
+def welcome_message():
+    return {'message': 'welcome to my api'}
