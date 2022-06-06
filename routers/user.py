@@ -32,7 +32,7 @@ async def update_user_password(password_data: schemas.UpdateUserPassword, db: Se
     - **New Password**
     """
 
-    user = db.query(models.User).filter(models.User.user_id == user_id)
+    user = db.query(models.User).filter(models.User.id == user_id)
 
     if not user.first():
         raise HTTPException(
@@ -61,7 +61,7 @@ async def update_user_details(user_data: schemas.UserUpdateDetails, db: Session 
         - **First Name**: Optional
         - **Last Name**: Optional
     """
-    user = db.query(models.User).filter(models.User.user_id == user_id)
+    user = db.query(models.User).filter(models.User.id == user_id)
 
     if not user.first():
         raise HTTPException(
@@ -84,7 +84,7 @@ async def update_profile_picture(picture_data: schemas.UpdateUserPicture, db: Se
 
     - **Picture**: in bytes(base64)
     """
-    user = db.query(models.User).filter(models.User.user_id == user_id)
+    user = db.query(models.User).filter(models.User.id == user_id)
 
     if not user.first():
         raise HTTPException(
@@ -103,7 +103,7 @@ async def get_user(id: int, db: Session = Depends(get_db), user_id: int = Depend
     """
     Retrieves a user using a user id passed in the path parameter
     """
-    user = db.query(models.User).filter(models.User.user_id == id).first()
+    user = db.query(models.User).filter(models.User.id == id).first()
 
     if not user:
         raise HTTPException(
