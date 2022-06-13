@@ -1,4 +1,5 @@
 from fastapi import Depends, HTTPException, status, APIRouter
+from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from database import get_db
 from util.oauth import generate_token
@@ -9,7 +10,7 @@ router = APIRouter(prefix="/login", tags=["signin"])
 
 
 @router.post("/", status_code=status.HTTP_202_ACCEPTED)
-async def signin(credentials: schemas.Signin, db: Session = Depends(get_db)):
+async def signin(credentials: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
 
     """
     Signs in a user and creates a unique token. Required fields are:

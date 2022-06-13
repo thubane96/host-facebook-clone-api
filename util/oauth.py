@@ -31,7 +31,6 @@ def verify_token(token: str, credentials_exception):
             raise credentials_exception
 
         return id
-
     except JWTError:
         raise credentials_exception
 
